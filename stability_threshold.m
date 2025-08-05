@@ -57,7 +57,7 @@ for kk = 1:num_block
     rate = zeros(1,num_customer);
     
     F_residual  = F;
-    status_precendence = ones(1,num_customer); 
+    status_precedence = ones(1,num_customer); 
     % 1 means waiting, 0 means ground/active, 100 means left.
     count_departure = 0; 
     interference_graph = zeros(num_customer,num_customer); % initialization of the inteference graph
@@ -69,9 +69,9 @@ for kk = 1:num_block
     DAG = interference_graph;
     while count_departure < num_customer
         for ii = 1:num_customer
-            status_precendence(ii) = sum(DAG(ii,1:ii));
+            status_precedence(ii) = sum(DAG(ii,1:ii));
         end
-        I_ground_nodes = find(status_precendence==0); % index set of the points on the ground
+        I_ground_nodes = find(status_precedence==0); % index set of the points on the ground
         for vv = I_ground_nodes 
             dist_ground_nodes = dist_cal(Y(vv,:),X(I_ground_nodes,:),W);
             interference(vv) = sum(path_loss_func(dist_ground_nodes)) -  path_loss_func(0);
